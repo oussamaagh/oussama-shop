@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAIT SHOP | متجر الزيت</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="logo">🔥 ZAIT <span>SHOP</span></div>
+
+    <nav>
+        <a href="#home">الرئيسية</a>
+        <a href="#products">المنتجات</a>
+        <a href="#recharge">تعبئة الهاتف</a>
+        <a href="#payment">الأداء</a>
+        <a href="#contact">اتصل بنا</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="tag">WELCOME TO ZAIT SHOP</span>
+        <h1>متجر <span>ZAIT SHOP</span></h1>
+        <p>اكتشف خدمات الزيت والتحديثات الإضافية وتعبئة الهاتف.</p>
+        <a href="#products" class="main-btn">اكتشف المنتجات</a>
+    </div>
+</section>
+
+<section class="section" id="products">
+    <h2>🔥 منتجاتنا</h2>
+    <p class="subtitle">اختر الخدمة التي تناسبك</p>
+
+    <div class="products">
+
+        <div class="product">
+            <div class="product-icon">⚡</div>
+            <span class="product-tag">7 DAYS</span>
+            <h3>زيت 1</h3>
+            <p>اشتراك لمدة 7 أيام</p>
+            <h2>25 DH</h2>
+            <button onclick="addToCart('زيت 1 - 7 أيام',25)">
+                شراء الآن
+            </button>
+        </div>
+
+        <div class="product">
+            <div class="product-icon">🔥</div>
+            <span class="product-tag">15 DAYS</span>
+            <h3>زيت 2</h3>
+            <p>اشتراك لمدة 15 يوماً</p>
+            <h2>50 DH</h2>
+            <button onclick="addToCart('زيت 2 - 15 يوم',50)">
+                شراء الآن
+            </button>
+        </div>
+
+        <div class="product">
+            <div class="product-icon">👑</div>
+            <span class="product-tag">LIFETIME</span>
+            <h3>زيت مدى الحياة</h3>
+            <p>اشتراك دائم</p>
+            <h2>الثمن عند التواصل</h2>
+            <button onclick="contactUs('زيت مدى الحياة')">
+                اطلب الآن
+            </button>
+        </div>
+
+        <div class="product">
+            <div class="product-icon">🛠️</div>
+            <span class="product-tag">EXTRA</span>
+            <h3>تحديثات إضافية</h3>
+            <p>خدمات وتحديثات إضافية</p>
+            <h2>100 DH</h2>
+            <button onclick="addToCart('تحديثات إضافية',100)">
+                شراء الآن
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<section class="section recharge" id="recharge">
+    <h2>📱 تعبئة الهاتف</h2>
+    <p class="subtitle">اختر شركة الاتصالات وأدخل معلومات التعبئة</p>
+
+    <div class="recharge-box">
+
+        <select id="operator">
+            <option value="Orange Maroc">Orange Maroc</option>
+            <option value="Inwi">Inwi</option>
+            <option value="Maroc Telecom">Maroc Telecom</option>
+        </select>
+
+        <input type="tel" id="phone"
+               placeholder="رقم الهاتف المغربي">
+
+        <input type="number" id="rechargeAmount"
+               min="1" placeholder="مبلغ التعبئة DH">
+
+        <button onclick="buyRecharge()">إرسال طلب التعبئة</button>
+
+    </div>
+</section>
+
+<section class="section payment" id="payment">
+    <h2>💳 وسائل الأداء</h2>
+    <p class="subtitle">اختر وسيلة الأداء المناسبة لك</p>
+
+    <div class="payment-list">
+        <div>🏦 تحويل بنكي</div>
+        <div>💳 CIH Bank</div>
+        <div>💵 Cash Plus</div>
+        <div>💵 Wafacash</div>
+        <div>📱 Orange Money</div>
+    </div>
+
+    <p class="note">
+        يتم تأكيد تفاصيل الأداء مع إدارة المتجر قبل إتمام الطلب.
+    </p>
+</section>
+
+<section class="section cart-section" id="cart">
+    <h2>🛒 سلة المشتريات</h2>
+
+    <div id="cartItems">السلة فارغة</div>
+
+    <h3>المجموع: <span id="total">0</span> DH</h3>
+
+    <div class="checkout">
+        <input type="text" id="customerName"
+               placeholder="الاسم الكامل">
+
+        <input type="text" id="customerContact"
+               placeholder="رقم الهاتف أو وسيلة التواصل">
+
+        <select id="paymentMethod">
+            <option value="تحويل بنكي">تحويل بنكي</option>
+            <option value="CIH Bank">CIH Bank</option>
+            <option value="Cash Plus">Cash Plus</option>
+            <option value="Wafacash">Wafacash</option>
+            <option value="Orange Money">Orange Money</option>
+        </select>
+
+        <button onclick="checkout()">تأكيد الطلب</button>
+    </div>
+</section>
+
+<section class="section contact" id="contact">
+    <h2>📩 تواصل معنا</h2>
+    <p>هل لديك سؤال أو تريد معرفة ثمن زيت مدى الحياة؟</p>
+
+    <a href="mailto:oussamaabbassi733@gmail.com">
+        oussamaabbassi733@gmail.com
+    </a>
+
+    <p class="contact-owner">ZAIT SHOP - Morocco 🇲🇦</p>
+</section>
+
+<footer>
+    <h3>🔥 ZAIT SHOP</h3>
+    <p>متجرك الخاص بخدمات الزيت</p>
+    <p>صاحب المشروع: أسامة العباسي</p>
+    <p>جميع الحقوق محفوظة © 2026</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
