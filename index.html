@@ -1,147 +1,129 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire Headshot Store</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUSSAMA ACADÉMIE AI</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="header">
-    <div class="logo">🔥 FF HEADSHOT STORE</div>
-    <button class="cart-button" onclick="toggleCart()">
-        🛒 السلة <span id="cart-count">0</span>
-    </button>
+<header>
+  <a class="logo" href="#">OUSSAMA <span>ACADÉMIE</span></a>
+
+  <div class="header-right">
+    <select id="language" onchange="changeLanguage(this.value)">
+      <option value="fr">🇫🇷 Français</option>
+      <option value="ar">🇲🇦 العربية</option>
+      <option value="en">🇬🇧 English</option>
+    </select>
+    <button class="menu" onclick="toggleMenu()">☰</button>
+  </div>
+
+  <nav id="nav">
+    <a href="#home" data-i18n="home">Accueil</a>
+    <a href="#generator" data-i18n="generator">Générateur</a>
+    <a href="#about" data-i18n="about">À propos</a>
+  </nav>
 </header>
 
-<section class="hero">
-    <h2>🌙 رمضان كريم 🌙</h2>
-    <h1>FREE FIRE STORE</h1>
-    <p>متجرك لزيوت فري فاير في المغرب 🇲🇦</p>
+<main>
 
-    <button class="code-open" onclick="openCodes()">
-        🎁 احصل على كود التخفيض
-    </button>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="tag">✦ OUSSAMA AI DEVELOPER</span>
+    <h1 data-i18n="title">
+      Transformez vos idées en applications
+    </h1>
+    <p data-i18n="subtitle">
+      Décrivez votre projet et découvrez les meilleures technologies pour le construire.
+    </p>
+    <a href="#generator" class="btn" data-i18n="start">
+      Commencer maintenant →
+    </a>
+  </div>
+
+  <div class="hero-icon">
+    <div class="glow">AI</div>
+    <span>HTML • CSS • JS</span>
+  </div>
 </section>
 
-<!-- أكواد التخفيض -->
-<div class="modal" id="code-modal">
-    <div class="modal-content">
-        <button class="close" onclick="closeCodes()">✖</button>
+<section id="generator">
+  <div class="heading">
+    <span class="tag">SMART PROJECT GENERATOR</span>
+    <h2 data-i18n="generatorTitle">Quel projet voulez-vous créer ?</h2>
+    <p data-i18n="generatorDesc">
+      Écrivez votre idée et notre assistant vous propose trois technologies.
+    </p>
+  </div>
 
-        <h2>🎁 أكواد رمضان</h2>
-        <p>اختر كوداً للحصول على تخفيض 15%</p>
+  <div class="generator-card">
+    <label data-i18n="ideaLabel">Décrivez votre idée :</label>
 
-        <div class="code-item">
-            <span>9889I6Y665H</span>
-            <button onclick="chooseCode('9889I6Y665H')">اختيار</button>
-        </div>
+    <textarea id="idea" placeholder="Exemple : Je veux créer une application de vente en ligne..."></textarea>
 
-        <div class="code-item">
-            <span>ODUID7CH</span>
-            <button onclick="chooseCode('ODUID7CH')">اختيار</button>
-        </div>
+    <label data-i18n="typeLabel">Type de projet :</label>
 
-        <div class="code-item">
-            <span>KDKKKD88</span>
-            <button onclick="chooseCode('KDKKKD88')">اختيار</button>
-        </div>
-
-        <div class="code-item">
-            <span>LLDKDK</span>
-            <button onclick="chooseCode('LLDKDK')">اختيار</button>
-        </div>
-
-        <p class="note">استعمل الكود في سلة المشتريات.</p>
-    </div>
-</div>
-
-<main>
-    <h2 class="section-title">🎯 زيوت Free Fire</h2>
-    <p class="subtitle">اختر الزيت المناسب لك</p>
-
-    <div class="products" id="products-list"></div>
-</main>
-
-<!-- السلة -->
-<div class="overlay" id="overlay" onclick="toggleCart()"></div>
-
-<aside class="cart-panel" id="cart-panel">
-
-    <div class="cart-header">
-        <h2>🛒 سلة المشتريات</h2>
-        <button onclick="toggleCart()">✖</button>
-    </div>
-
-    <div id="cart-items"></div>
-
-    <div class="coupon">
-        <h3>🎟️ كود التخفيض</h3>
-
-        <input
-            id="coupon-input"
-            placeholder="أدخل كود رمضان"
-            dir="ltr"
-        >
-
-        <button onclick="applyCoupon()">تفعيل الكود</button>
-        <p id="coupon-message"></p>
-    </div>
-
-    <div class="total-box">
-        <p>المجموع الأصلي:
-            <span id="original-total">0 DH</span>
-        </p>
-
-        <p>التخفيض:
-            <span id="discount-total">0 DH</span>
-        </p>
-
-        <h3>المجموع النهائي:
-            <span id="final-total">0 DH</span>
-        </h3>
-    </div>
-
-    <h3>💳 طريقة الدفع</h3>
-
-    <select id="payment">
-        <option value="">اختر طريقة الدفع</option>
-        <option>Inwi Money</option>
-        <option>تعبئة Inwi</option>
-        <option>Orange Money</option>
-        <option>تعبئة Orange</option>
-        <option>اتصالات المغرب Jawal</option>
-        <option>البطاقة البنكية المغربية</option>
-        <option>Cash Plus</option>
-        <option>Wafacash</option>
-        <option>تحويل بنكي</option>
+    <select id="projectType">
+      <option value="website" data-i18n="website">Site web</option>
+      <option value="mobile" data-i18n="mobile">Application mobile</option>
+      <option value="store" data-i18n="store">Boutique en ligne</option>
+      <option value="game" data-i18n="game">Jeu vidéo</option>
+      <option value="dashboard" data-i18n="dashboard">Tableau de bord</option>
+      <option value="other" data-i18n="other">Autre projet</option>
     </select>
 
-    <p class="payment-note">
-        يتم تأكيد تفاصيل الدفع مع صاحب المتجر.
-    </p>
-
-    <button class="checkout" onclick="checkout()">
-        تأكيد الطلب
+    <button class="btn generate-btn" onclick="generateProject()" data-i18n="generate">
+      ✨ Générer mes technologies
     </button>
-</aside>
 
-<section class="contact">
-    <h2>📩 تواصل معنا</h2>
-    <p>للاستفسار عن الزيت 5 والطلبات</p>
+    <p id="error"></p>
+  </div>
 
-    <a href="mailto:oussamaabbassi733@gmail.com">
-        oussamaabbassi733@gmail.com
-    </a>
+  <div id="results" class="results hidden">
+    <h2 data-i18n="recommendations">Vos 3 technologies recommandées</h2>
+    <div id="technologyList" class="tech-grid"></div>
+
+    <div class="code-section">
+      <div class="code-header">
+        <h3 data-i18n="codeTitle">Votre code de départ</h3>
+        <button onclick="copyCode()" data-i18n="copy">Copier le code</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="showCode('html',this)">HTML</button>
+        <button class="tab" onclick="showCode('css',this)">CSS</button>
+        <button class="tab" onclick="showCode('js',this)">JavaScript</button>
+      </div>
+
+      <pre><code id="codeOutput"></code></pre>
+
+      <button class="btn download-btn" onclick="downloadProject()" data-i18n="download">
+        ↓ Télécharger le code
+      </button>
+    </div>
+  </div>
 </section>
 
+<section id="about">
+  <div class="about-card">
+    <div class="avatar">O</div>
+    <h2>Oussama Abbassi</h2>
+    <p>Fondateur de OUSSAMA ACADÉMIE</p>
+    <a href="mailto:oussamaabbassi733@GMAIL.COM">
+      oussamaabbassi733@GMAIL.COM
+    </a>
+  </div>
+</section>
+
+</main>
+
 <footer>
-    <h3>👑 صاحب المشروع</h3>
-    <h2>أسامة العباسي</h2>
-    <p>FREE FIRE HEADSHOT STORE 🇲🇦</p>
-    <small>جميع الحقوق محفوظة © 2026</small>
+  <h3>OUSSAMA <span>ACADÉMIE</span></h3>
+  <p>Learn. Create. Innovate.</p>
+  <p>© 2026 Oussama Abbassi. Tous droits réservés.</p>
 </footer>
 
 <script src="script.js"></script>
