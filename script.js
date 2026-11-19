@@ -1,345 +1,344 @@
 
-const products = [
-    { id: 1, name: "الزيت 1", duration: "9 أيام", price: 30, color: "#ff3158" },
-    { id: 2, name: "الزيت 2", duration: "شهر كامل", price: 55, color: "#168cff" },
-    { id: 3, name: "الزيت 3", duration: "شهرين", price: 99, color: "#a45cff" },
-    { id: 4, name: "الزيت 4", duration: "120 يوم", price: 130, color: "#ff9d32" },
-    { id: 5, name: "الزيت 5", duration: "مدى الحياة", price: null, color: "#35d8d0" }
-];
+const translations = {
+  fr: {
+    home:"Accueil",
+    generator:"Générateur",
+    about:"À propos",
+    title:"Transformez vos idées en applications",
+    subtitle:"Décrivez votre projet et découvrez les meilleures technologies pour le construire.",
+    start:"Commencer maintenant →",
+    generatorTitle:"Quel projet voulez-vous créer ?",
+    generatorDesc:"Écrivez votre idée et notre assistant vous propose trois technologies.",
+    ideaLabel:"Décrivez votre idée :",
+    typeLabel:"Type de projet :",
+    website:"Site web",
+    mobile:"Application mobile",
+    store:"Boutique en ligne",
+    game:"Jeu vidéo",
+    dashboard:"Tableau de bord",
+    other:"Autre projet",
+    generate:"✨ Générer mes technologies",
+    recommendations:"Vos 3 technologies recommandées",
+    codeTitle:"Votre code de départ",
+    copy:"Copier le code",
+    download:"↓ Télécharger le code"
+  },
 
-const promoCodes = [
-    "9889I6Y665H",
-    "ODUID7CH",
-    "KDKKKD88",
-    "LLDKDK"
-];
+  ar: {
+    home:"الرئيسية",
+    generator:"مولّد المشاريع",
+    about:"حول الأكاديمية",
+    title:"حوّل أفكارك إلى تطبيقات",
+    subtitle:"اكتب فكرة مشروعك واكتشف أفضل التقنيات لإنشائه.",
+    start:"ابدأ الآن ←",
+    generatorTitle:"ما المشروع الذي تريد إنشاءه؟",
+    generatorDesc:"اكتب فكرتك وسيقترح عليك المساعد ثلاث تقنيات.",
+    ideaLabel:"اشرح فكرة مشروعك:",
+    typeLabel:"نوع المشروع:",
+    website:"موقع إلكتروني",
+    mobile:"تطبيق هاتف",
+    store:"متجر إلكتروني",
+    game:"لعبة فيديو",
+    dashboard:"لوحة تحكم",
+    other:"مشروع آخر",
+    generate:"✨ أنشئ اقتراحات التقنيات",
+    recommendations:"أفضل 3 تقنيات لمشروعك",
+    codeTitle:"الأكواد الأولية لمشروعك",
+    copy:"نسخ الكود",
+    download:"↓ تحميل الأكواد"
+  },
 
-let cart = [];
-let couponApplied = false;
-let appliedCode = "";
+  en: {
+    home:"Home",
+    generator:"Generator",
+    about:"About",
+    title:"Turn your ideas into applications",
+    subtitle:"Describe your project and discover the best technologies to build it.",
+    start:"Start now →",
+    generatorTitle:"What project do you want to create?",
+    generatorDesc:"Write your idea and our assistant will suggest three technologies.",
+    ideaLabel:"Describe your idea:",
+    typeLabel:"Project type:",
+    website:"Website",
+    mobile:"Mobile application",
+    store:"Online store",
+    game:"Video game",
+    dashboard:"Dashboard",
+    other:"Other project",
+    generate:"✨ Generate my technologies",
+    recommendations:"Your 3 recommended technologies",
+    codeTitle:"Your starter code",
+    copy:"Copy code",
+    download:"↓ Download code"
+  }
+};
 
-const productsList = document.getElementById("products-list");
+const technologies = {
+  website: [
+    ["🌐","HTML","Structure des pages web."],
+    ["🎨","CSS","Design et mise en page."],
+    ["⚡","JavaScript","Interactions et fonctionnalités."]
+  ],
+  mobile: [
+    ["⚛️","React Native","Développement mobile multiplateforme."],
+    ["🟨","JavaScript","Logique de l'application."],
+    ["🔥","Firebase","Authentification et données."]
+  ],
+  store: [
+    ["🌐","HTML","Structure de la boutique."],
+    ["🎨","CSS","Design de la boutique."],
+    ["⚡","JavaScript","Panier et interactions."]
+  ],
+  game: [
+    ["🎮","JavaScript","Logique du jeu."],
+    ["🖼️","HTML Canvas","Affichage graphique."],
+    ["🎨","CSS","Interface et menus."]
+  ],
+  dashboard: [
+    ["🌐","HTML","Structure du tableau de bord."],
+    ["🎨","CSS","Interface utilisateur."],
+    ["⚡","JavaScript","Graphiques et interactions."]
+  ],
+  other: [
+    ["🌐","HTML","Structure de l'application."],
+    ["🎨","CSS","Design et présentation."],
+    ["⚡","JavaScript","Fonctionnalités interactives."]
+  ]
+};
 
-// رسم صورة هيدشوت خاصة بكل منتج
-function headshotImage(color, id) {
-    return `
-    <div class="headshot-image">
-        <svg viewBox="0 0 320 180"
-             xmlns="http://www.w3.org/2000/svg">
+const starterCode = {
+  html: `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Projet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-            <defs>
-                <linearGradient id="bg${id}" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="${color}"/>
-                    <stop offset="100%" stop-color="#071329"/>
-                </linearGradient>
-            </defs>
+  <header>
+    <h1>Bienvenue dans mon projet</h1>
+  </header>
 
-            <rect width="320" height="180"
-                  fill="url(#bg${id})"/>
+  <main>
+    <h2>Mon application</h2>
+    <p>Créé avec OUSSAMA ACADÉMIE.</p>
+    <button id="action">Commencer</button>
+  </main>
 
-            <circle cx="160" cy="83" r="65"
-                    fill="none" stroke="white"
-                    stroke-width="2" opacity=".5"/>
+  <script src="script.js"><\/script>
+</body>
+</html>`,
 
-            <circle cx="160" cy="83" r="48"
-                    fill="none" stroke="white"
-                    stroke-width="1" opacity=".5"/>
-
-            <!-- شخصية مقاتل خيالية -->
-            <path d="M100 180 Q105 120 135 112
-                     L145 106 L175 106 L185 112
-                     Q215 120 220 180 Z"
-                  fill="#101a30" stroke="white"
-                  stroke-width="2"/>
-
-            <path d="M125 76 Q125 24 160 23
-                     Q195 24 195 76
-                     L184 108 Q160 126 136 108 Z"
-                  fill="#263d60" stroke="#d9edff"
-                  stroke-width="2"/>
-
-            <path d="M125 65 Q130 18 160 18
-                     Q190 18 195 65
-                     L181 53 L160 48 L139 53 Z"
-                  fill="#101a30" stroke="${color}"
-                  stroke-width="4"/>
-
-            <path d="M139 76 L154 73
-                     M166 73 L181 76"
-                  stroke="#8eeaff" stroke-width="5"
-                  stroke-linecap="round"/>
-
-            <path d="M146 94 Q160 101 174 94"
-                  fill="none" stroke="white"
-                  stroke-width="2"/>
-
-            <!-- علامة الهيدشوت -->
-            <path d="M160 5 V30 M160 140 V165
-                     M80 83 H105 M215 83 H240"
-                  stroke="white" stroke-width="3"/>
-
-            <circle cx="160" cy="83" r="7"
-                    fill="${color}" stroke="white"
-                    stroke-width="2"/>
-
-            <text x="160" y="160"
-                  font-size="13" font-weight="bold"
-                  fill="white" text-anchor="middle">
-                HEADSHOT
-            </text>
-        </svg>
-    </div>`;
+  css: `* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// عرض المنتجات
-function displayProducts() {
-    productsList.innerHTML = "";
+body {
+  font-family: Arial, sans-serif;
+  background: #080d1c;
+  color: white;
+  text-align: center;
+}
 
-    products.forEach(product => {
-        const card = document.createElement("div");
-        card.className = "product-card";
+header {
+  padding: 25px;
+  background: #121c33;
+}
 
-        if (product.price !== null) {
-            card.innerHTML = `
-                ${headshotImage(product.color, product.id)}
+main {
+  padding: 60px 20px;
+}
 
-                <h3>${product.name}</h3>
+button {
+  padding: 12px 25px;
+  background: #8065ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}`,
 
-                <p class="duration">
-                    ⏳ المدة: ${product.duration}
-                </p>
+  js: `const button = document.getElementById("action");
 
-                <p class="price">
-                    ${product.price.toFixed(2)} DH
-                </p>
+button.addEventListener("click", () => {
+  alert("Bienvenue dans votre projet !");
+});
 
-                <button class="add-btn"
-                    onclick="addToCart(${product.id})">
-                    🛒 أضف إلى السلة
-                </button>
-            `;
-        } else {
-            card.innerHTML = `
-                ${headshotImage(product.color, product.id)}
+console.log("Projet créé avec OUSSAMA ACADÉMIE");`
+};
 
-                <h3>${product.name}</h3>
+let currentCode = "html";
+let currentProject = null;
 
-                <p class="duration">⏳ مدى الحياة</p>
+function changeLanguage(lang) {
+  const t = translations[lang];
 
-                <p>الثمن عند التواصل معنا</p>
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
-                <a class="add-btn"
-                   style="display:block;text-decoration:none;margin-top:15px"
-                   href="mailto:oussamaabbassi733@gmail.com">
-                   تواصل معنا
-                </a>
-            `;
-        }
+  document.body.classList.toggle("rtl",lang === "ar");
 
-        productsList.appendChild(card);
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if(t[key]) el.textContent = t[key];
+  });
+
+  document.getElementById("idea").placeholder =
+    lang === "ar"
+      ? "مثال: أريد إنشاء تطبيق للتجارة الإلكترونية..."
+      : lang === "en"
+      ? "Example: I want to create an online shopping app..."
+      : "Exemple : Je veux créer une application de commerce en ligne...";
+
+  document.getElementById("language").value = lang;
+
+  document.getElementById("projectType").querySelectorAll("option").forEach(option => {
+    const key = option.dataset.i18n;
+    if(key && t[key]) option.textContent = t[key];
+  });
+
+  if(currentProject) renderResults();
+}
+
+function toggleMenu() {
+  document.getElementById("nav").classList.toggle("open");
+}
+
+function generateProject() {
+  const idea = document.getElementById("idea").value.trim();
+  const type = document.getElementById("projectType").value;
+
+  const lang = document.getElementById("language").value;
+
+  if(!idea) {
+    document.getElementById("error").textContent =
+      lang === "ar" ? "يرجى كتابة فكرة مشروعك أولاً." :
+      lang === "en" ? "Please describe your project first." :
+      "Veuillez décrire votre projet.";
+    return;
+  }
+
+  document.getElementById("error").textContent = "";
+
+  currentProject = {
+    idea,
+    type,
+    technologies: technologies[type]
+  };
+
+  renderResults();
+
+  document.getElementById("results").classList.remove("hidden");
+  document.getElementById("results").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+function renderResults() {
+  if(!currentProject) return;
+
+  const lang = document.getElementById("language").value;
+
+  const descriptions = {
+    ar: [
+      "تقنية لبناء هيكل المشروع.",
+      "تقنية لتصميم واجهة المشروع.",
+      "تقنية لإضافة الوظائف والتفاعل."
+    ],
+    fr: [
+      "Technologie pour structurer le projet.",
+      "Technologie pour concevoir l'interface.",
+      "Technologie pour ajouter les fonctionnalités."
+    ],
+    en: [
+      "Technology for the project structure.",
+      "Technology for the user interface.",
+      "Technology for interactive features."
+    ]
+  };
+
+  const grid = document.getElementById("technologyList");
+
+  grid.innerHTML = "";
+
+  currentProject.technologies.forEach((tech,i) => {
+    const card = document.createElement("div");
+    card.className = "tech-card";
+
+    const icon = document.createElement("div");
+    icon.className = "tech-icon";
+    icon.textContent = tech[0];
+
+    const title = document.createElement("h3");
+    title.textContent = tech[1];
+
+    const desc = document.createElement("p");
+    desc.textContent = descriptions[lang][i];
+
+    card.append(icon,title,desc);
+    grid.appendChild(card);
+  });
+
+  showCode(currentCode);
+}
+
+function showCode(type,button) {
+  currentCode = type;
+
+  document.getElementById("codeOutput").textContent =
+    starterCode[type];
+
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.classList.remove("active");
+  });
+
+  if(button) button.classList.add("active");
+  else {
+    document.querySelectorAll(".tab").forEach(tab => {
+      if(tab.textContent.toLowerCase().includes(type)) {
+        tab.classList.add("active");
+      }
     });
+  }
 }
 
-// فتح نافذة الأكواد
-function openCodes() {
-    document.getElementById("code-modal").classList.add("show");
+async function copyCode() {
+  const code = starterCode[currentCode];
+
+  try {
+    await navigator.clipboard.writeText(code);
+    alert("Code copié avec succès !");
+  } catch {
+    alert("Impossible de copier automatiquement. Sélectionnez le code manuellement.");
+  }
 }
 
-// إغلاق نافذة الأكواد
-function closeCodes() {
-    document.getElementById("code-modal").classList.remove("show");
-}
+function downloadProject() {
+  const files = [
+    ["index.html",starterCode.html],
+    ["style.css",starterCode.css],
+    ["script.js",starterCode.js]
+  ];
 
-// اختيار كود
-function chooseCode(code) {
-    document.getElementById("coupon-input").value = code;
-
-    closeCodes();
-
-    document.getElementById("cart-panel").classList.add("active");
-    document.getElementById("overlay").classList.add("active");
-
-    document.getElementById("coupon-message").style.color = "#ffd76a";
-
-    document.getElementById("coupon-message").textContent =
-        "تم اختيار الكود. اضغط تفعيل التخفيض بعد اختيار المنتج.";
-}
-
-// فتح وإغلاق السلة
-function toggleCart() {
-    document.getElementById("cart-panel").classList.toggle("active");
-    document.getElementById("overlay").classList.toggle("active");
-}
-
-// إضافة منتج
-function addToCart(id) {
-    const product = products.find(p => p.id === id);
-
-    if (!product || product.price === null) {
-        alert("تواصل معنا لمعرفة ثمن الزيت 5");
-        return;
-    }
-
-    const existing = cart.find(item => item.id === id);
-
-    if (existing) {
-        existing.quantity++;
-    } else {
-        cart.push({
-            ...product,
-            quantity: 1
-        });
-    }
-
-    updateCart();
-
-    alert("تمت إضافة " + product.name + " إلى السلة 💎");
-}
-
-// تفعيل كود التخفيض
-function applyCoupon() {
-    const code = document.getElementById("coupon-input")
-        .value.trim().toUpperCase();
-
-    const message = document.getElementById("coupon-message");
-
-    if (promoCodes.includes(code)) {
-        couponApplied = true;
-        appliedCode = code;
-
-        message.style.color = "#35e99a";
-        message.textContent =
-            "✅ مبروك! تم تفعيل تخفيض 15%";
-
-    } else {
-        couponApplied = false;
-        appliedCode = "";
-
-        message.style.color = "#ff526d";
-        message.textContent =
-            "❌ الكود غير صحيح، حاول مرة أخرى.";
-    }
-
-    updateCart();
-}
-
-// تحديث السلة
-function updateCart() {
-    const container = document.getElementById("cart-items");
-
-    container.innerHTML = "";
-
-    let originalTotal = 0;
-
-    if (cart.length === 0) {
-        container.innerHTML = "<p>السلة فارغة 🛒</p>";
-    }
-
-    cart.forEach(item => {
-        originalTotal += item.price * item.quantity;
-
-        const div = document.createElement("div");
-        div.className = "cart-item";
-
-        div.innerHTML = `
-            <div>
-                <strong>${item.name}</strong>
-                <p>${item.duration}</p>
-                <p>${item.quantity} × ${item.price} DH</p>
-            </div>
-
-            <button class="remove-btn"
-                onclick="removeItem(${item.id})">
-                حذف
-            </button>
-        `;
-
-        container.appendChild(div);
+  files.forEach(([name,content]) => {
+    const blob = new Blob([content], {
+      type:"text/plain;charset=utf-8"
     });
 
-    const discount = couponApplied
-        ? originalTotal * 0.15
-        : 0;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
 
-    const finalTotal = originalTotal - discount;
+    a.href = url;
+    a.download = name;
+    a.click();
 
-    document.getElementById("cart-count").textContent =
-        cart.reduce((sum, item) => sum + item.quantity, 0);
-
-    document.getElementById("original-total").textContent =
-        originalTotal.toFixed(2) + " DH";
-
-    document.getElementById("discount-total").textContent =
-        discount.toFixed(2) + " DH";
-
-    document.getElementById("final-total").textContent =
-        finalTotal.toFixed(2) + " DH";
+    URL.revokeObjectURL(url);
+  });
 }
 
-// حذف منتج
-function removeItem(id) {
-    cart = cart.filter(item => item.id !== id);
-    updateCart();
-}
-
-// تأكيد الطلب
-function checkout() {
-    if (cart.length === 0) {
-        alert("السلة فارغة!");
-        return;
-    }
-
-    const payment = document.getElementById("payment").value;
-
-    if (!payment) {
-        alert("اختر طريقة الدفع أولا!");
-        return;
-    }
-
-    const originalTotal = cart.reduce(
-        (sum, item) => sum + item.price * item.quantity, 0
-    );
-
-    const discount = couponApplied
-        ? originalTotal * 0.15
-        : 0;
-
-    const finalTotal = originalTotal - discount;
-
-    const orderDetails = cart.map(item =>
-        `${item.name} | ${item.duration} | العدد: ${item.quantity}`
-    ).join("\n");
-
-    const body = `
-السلام عليكم، أريد طلباً من متجر Free Fire.
-
-${orderDetails}
-
-المجموع الأصلي: ${originalTotal.toFixed(2)} DH
-
-كود التخفيض: ${couponApplied ? appliedCode : "بدون كود"}
-
-التخفيض: ${couponApplied ? "15%" : "0%"}
-
-قيمة التخفيض: ${discount.toFixed(2)} DH
-
-المجموع النهائي: ${finalTotal.toFixed(2)} DH
-
-طريقة الدفع: ${payment}
-
-الدولة: المغرب
-
-المرجو تأكيد طلبي وإرسال تفاصيل الدفع.
-    `;
-
-    const subject = "طلب جديد - FF HEADSHOT STORE";
-
-    window.location.href =
-        "mailto:oussamaabbassi733@gmail.com?subject=" +
-        encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
-}
-
-// تشغيل الموقع
-displayProducts();
-updateCart();
+changeLanguage("fr");
